@@ -1,5 +1,4 @@
 @startuml
-!theme plain
 participant User
 participant Client
 participant AuthorizationServer

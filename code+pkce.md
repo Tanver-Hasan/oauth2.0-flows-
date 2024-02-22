@@ -1,8 +1,10 @@
 
+---
+Authorization Code flow 
+---
+
 ```mermaid
----
-title: Oauth2.0 Authorization Code flow 
----
+
 sequenceDiagram
     autonumber
     participant User

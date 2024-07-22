@@ -24,3 +24,6 @@ sequenceDiagram
   api -->> a: Return Resource Data
   note right of a: { "data": "resource_data" }
 ```
+
+
+### Image Link : [Client Credentials Flow](https://github.com/Tanver-Hasan/oauth2.0-flows-/blob/main/images/client_credentails_flow.png)

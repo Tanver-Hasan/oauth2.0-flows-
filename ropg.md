@@ -2,7 +2,9 @@
 Resource Owner Password Grant type
 ---
 
-```sequenceDiagram
+```mermaid
+
+sequenceDiagram
   actor u as User
   actor a as Application
   participant a0 as Auth0

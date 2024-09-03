@@ -5,6 +5,7 @@ Handle missing fields when user login with social provider
 
 ```mermaid
 sequenceDiagram
+    autonumber
     participant User
     participant Application
     participant Auth0
@@ -32,3 +33,4 @@ sequenceDiagram
     note left of Auth0 : Reuturns authz code and <br> Auth0 exchanges the code for token
     Application ->> User: User is logged in
 ```
+

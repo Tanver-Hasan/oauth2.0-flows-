@@ -6,7 +6,7 @@ Resource Owner Password Grant type
 
 sequenceDiagram
   actor u as User
-  actor a as Application
+  participant a as Application
   participant a0 as Auth0
   participant api as Resource Server
   autonumber

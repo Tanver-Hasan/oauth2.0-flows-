@@ -59,7 +59,7 @@ sequenceDiagram
 
 ```
 
-* User initiates login via the application, which redirects to Auth0 (/authorize endpoint).
+* User initiates login via the application, which redirects to Auth0 (`/authorize` endpoint).
 * Auth0 presents the Universal Login Page, where the user clicks on "Forgot Password?".
 * User enters their email and submits the request; Auth0 triggers a password reset process.
 * Auth0 sends a password reset email with a magic link, provided the email exists in the system (prevents enumeration attacks).
@@ -79,7 +79,7 @@ sequenceDiagram
 
 ### Option 2: Interactive Password Reset Flow via Profile Page using Authentication API Change Password Endpoint
 
-Integrate a password reset option within the application's profile page, eliminating the need for user input since the email can be retrieved from the logged-in session. When triggered, initiate an interactive password reset flow by making a POST request to the Auth0 Authentication API Change Password endpoint, including the user's email in the request payload. Upon successful execution, Auth0 sends a password reset email to the user, allowing them to set a new password securely.
+Integrate a password reset option within the application's profile page, eliminating the need for user input since the email can be retrieved from the logged-in session. When triggered, initiate an interactive password reset flow by making a POST request to the Auth0 Authentication API [Change Password endpoint](https://auth0.com/docs/api/authentication#change-password), including the user's email in the request payload. Upon successful execution, Auth0 sends a password reset email to the user, allowing them to set a new password securely.
 
 The follwoing sequence diagram highligts the flow.
 
@@ -98,7 +98,7 @@ sequenceDiagram
 
     %% section [B] User Initiates Password Reset
     User->>App: Click on Forgot Password button on the profile page
-    opt
+    opt Prompt for Email address
     App-->>User: Prompt to enter email 
     User->>App:  User Enter email address and submit request
     end
@@ -135,11 +135,11 @@ sequenceDiagram
     %% end
 ```
 
-* User logs in via the application, which redirects to Auth0 (/authorize).
+* User logs in via the application, which redirects to Auth0 (`/authorize`).
 * Auth0 presents the Universal Login Page.
 * User initiates password reset from the profile page by clicking "Forgot Password?".
 * (Optional) The application prompts the user to enter their email, which is then submitted.
-* Application sends a password reset request to the Auth0 Authentication API (/dbconnections/change_password).
+* Application sends a password reset request to the Auth0 Authentication API (`/dbconnections/change_password`).
 * Auth0 delivers a password reset email containing a magic link.
 * Application confirms email dispatch to the user.
 * User clicks the password reset link, which redirects to the Universal Login Change Password Page.
@@ -160,7 +160,7 @@ sequenceDiagram
 
 ### Option 3: Self Service Password Reset Flow via Management API (Directly set the new password )
 
-Integrate a password reset form within the profile page, allowing users to directly enter a new password. Use the Auth0 Management API to update the password without requiring a password reset email. Optionally, trigger a password change confirmation email using a Post Change Password Action to notify the user after a successful update.
+Integrate a password reset form within the profile page, allowing users to directly enter a new password. Use the Auth0 Management API to update the password without requiring a password reset email. 
 
 ```mermaid
 sequenceDiagram
@@ -217,9 +217,9 @@ sequenceDiagram
 * Application prompts the user to enter the old password and a new password.
 * User submits the old and new passwords.
 * Application calls the Auth0 Management API Proxy, passing the old and new passwords.
-* API verifies the old password by calling Auth0’s /oauth/token endpoint using the Resource Owner Password Grant (ROPG) flow.
-* API obtains a Management API token using the Client Credentials flow.
-* API updates the user's password via the Auth0 Management API (PATCH /api/v2/users).
+* API verifies the old password by calling Auth0’s `/oauth/toke`n endpoint using the [Resource Owner Password Grant (ROPG) flow](https://auth0.com/docs/api/authentication#resource-owner-password-flow).
+* API obtains a Management API token using the [Client Credentials flow](https://auth0.com/docs/api/authentication#get-token56).
+* API updates the user's password via the Auth0 Management API (PATCH [/api/v2/users](https://auth0.com/docs/api/management/v2/users/patch-users-by-id)).
 * Auth0 confirms the password update with an HTTP 200 response.
 * API returns the success response to the application.
 * Application displays a success message to the user.
@@ -290,7 +290,7 @@ sequenceDiagram
 * User initiates login via the application, which redirects to Auth0 (`/authorize`).
 * Auth0 presents the Universal Login Page.
 * User navigates to the Profile page and triggers the password change flow.
-* Application redirects the user to Auth0’s Universal Login Page (/authorize).
+* Application redirects the user to Auth0’s Universal Login Page (`/authorize`).
     * Includes prompt=login to enforce re-authentication.
     * Passes scope=update:password to initiate the password reset flow.
     * Includes login_hint to pre-fill the user's email.
@@ -299,8 +299,8 @@ sequenceDiagram
 * (If MFA is enforced), Auth0 challenges the user with an MFA prompt.
 * User completes MFA verification (if required).
 * Auth0 triggers a Post-Login Action to initiate the password change process.
-    * The action obtains a Management API token via the Client Credentials flow.
-    It then calls the Management API to generate a Password Change Ticket.
+    * The action obtains a Management API token via the [Client Credentials flow](https://auth0.com/docs/api/authentication#get-token56).
+    It then calls the Management API to generate a [Password Change Ticket](https://auth0.com/docs/api/management/v2/tickets/post-password-change).
 * Auth0 redirects the user to the Password Change URL.
 * User enters a new password in the provided form.
 * Auth0 updates the password and confirms the change.

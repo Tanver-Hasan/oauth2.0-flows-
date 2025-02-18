@@ -89,14 +89,12 @@ sequenceDiagram
     participant App as Application 
     participant Tenant as Okta CIC (Auth0)
     autonumber
-    %% section [A] User Initiates Login
+
     User->>App:  Login 
     App->>Tenant:  /authorize
     note left of Tenant :  Universal Login Redirect
     Tenant-->>User:  Universal Login Page
-    %% end
 
-    %% section [B] User Initiates Password Reset
     User->>App: Click on Forgot Password button on the profile page
     opt Prompt for Email address
     App-->>User: Prompt to enter email 
@@ -106,9 +104,7 @@ sequenceDiagram
     Tenant-->>User: Email delivered with Password Reset Magic Link
     note  right of User: Email sent only if email exist in the system
     App-->>User:  Email Dispatch Confirmation
-    %% end
 
-    %% section [C] User Performs Password Reset
     User->> Tenant:  Click on Password Reset Link from the inbox
     note right of User: User redirected to the Universal Loign Change Password Page
     Tenant->>Tenant:  Verify Password Reset Magic Link
@@ -124,15 +120,13 @@ sequenceDiagram
     Tenant-->>Tenant:  New Password Set
     Tenant -->> User : Password Reset Confirmation Screen 
     note left of Tenant : Confirmation screen shows button <br> nagivate back to the application Login Page / Home Page
-    %% end
 
-    %% section [D] User Navigates to Universal Login Page
     User->>App:  Return to Login Page
     App->>Tenant:  Redirect to Universal Login Page
     Tenant-->>User : Universal Login Page
 
     note right of User: * User can now log in with the new password *
-    %% end
+
 ```
 
 * User logs in via the application, which redirects to Auth0 (`/authorize`).
@@ -169,7 +163,7 @@ sequenceDiagram
     participant Tenant as Okta CIC (Auth0)
     Participant API as Auth0 Management API Proxy
     autonumber
-    %%  User Initiates Login
+
     User->>App:  Login 
     App->>Tenant:  /authorize
     note left of Tenant :  Universal Login Page Redirect
@@ -201,12 +195,12 @@ sequenceDiagram
     App -->> User: Show Success Message 
     App ->> Tenant : Logout the user from app and force re-login
 
-    %% section [D] User Navigates to Universal Login Page
+
     User->>App:  Return to Login Page
     App->>Tenant:  Redirect to Universal Login Page
     Tenant-->>User : Universal Login Page
     note right of User: * User can now log in with the new password *
-    %% end
+
 ```
 
 
@@ -249,14 +243,12 @@ sequenceDiagram
     participant App as Application 
     participant Tenant as Okta CIC (Auth0)
     autonumber
-    %% section [A] User Initiates Login
+
     User->>App:  Login 
     App->>Tenant:  /authorize
     note left of Tenant :  Universal Login Redirect
     Tenant-->>User:  Universal Login Page
-    %% end
 
-    %% section [B] User Initiates Password Reset
     User->>App: User goes goes to Profile page and trigger change password flow
     App->>Tenant:  Redirected to Universal Login Page 
     note right of App: User is redirected to the /authorize endpoint with prompt=login param . <br> Pass addtional scope parameter to triger password reset flow (scope=update:password). <br> Additionally, pass login_hint 
@@ -276,15 +268,13 @@ sequenceDiagram
     Tenant-->>Tenant:  New Password Set
     Tenant -->> User : Password Reset Confirmation Screen 
     note left of Tenant : Confirmation screen shows button <br> nagivate back to the application Login Page / Home Page
-    %% end
 
-    %% section [D] User Navigates to Universal Login Page
     User->>App:  Return to Login Page
     App->>Tenant:  Redirect to Universal Login Page
     Tenant-->>User : Universal Login Page
 
-    note right of User: * User can now log in with the new password *
-    %% end
+    note right of User: User can now log in with the new password
+
 ```
 
 * User initiates login via the application, which redirects to Auth0 (`/authorize`).

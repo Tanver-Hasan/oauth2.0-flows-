@@ -1,6 +1,8 @@
 
 
-
+---
+### Device Authorization Flow 
+---
 
 ```mermaid 
 
@@ -34,6 +36,6 @@ sequenceDiagram
     end
 
 
-    da ->> api as API: Request user data with Access Token
-    api as API -->> da: Response
+    da ->> api: Request user data with Access Token
+    api -->> da: Response
 ```
